@@ -13,6 +13,7 @@ jobs:
     steps:
       - name: Copy Repo Files
         uses: actions/checkout@master
+      - run: echo $(dirname ${GITHUB_REPOSITORY})
       - name: Get GitHub organization or user
         run: echo ::set-env name=ORG::$(dirname ${GITHUB_REPOSITORY})
       - name: Set up Docker Buildx
@@ -23,6 +24,6 @@ jobs:
       - name: Available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
       - name: Login
-        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }}
+        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }} docker.pkg.github.com
       - name: Build
-        run: docker buildx build -f Dockerfile -t ${ORG}/github-runner:latest --output "type=image,push=true" --platform linux/amd64,linux/arm/v7,linux/arm64 .
+        run: docker buildx build -f Dockerfile -t docker.pkg.github.com/${ORG}/github-runner:latest --output "type=image,push=true" --platform linux/amd64,linux/arm/v7,linux/arm64 .

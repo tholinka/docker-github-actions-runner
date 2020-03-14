@@ -7,15 +7,16 @@ ARG TARGETPLATFORM
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # hadolint ignore=DL3003
 RUN apt-get update && apt-get install -y \
+  curl \
   apt-transport-https \
   ca-certificates \
   curl \
   gnupg2 \
   software-properties-common
 
-RUN curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add - \
-  && apt-get update \ && apt-get install -y docker-ce docker-ce-cli containerd.io --no-install-recommends \
-  && rm -rf /var/lib/apt/lists/*
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+RUN apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io --no-install-recommends
+RUN rm -rf /var/lib/apt/lists/*
 
 WORKDIR /actions-runner
 COPY install_actions.sh /actions-runner

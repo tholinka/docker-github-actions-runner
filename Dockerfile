@@ -11,7 +11,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   ca-certificates \
   curl \
   gnupg2 \
-  software-properties-common
+  software-properties-common \
+  iputils-ping
 
 # install docker
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -

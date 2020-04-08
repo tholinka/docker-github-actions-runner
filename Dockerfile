@@ -1,6 +1,6 @@
 FROM debian:stable-slim
 
-ARG GH_RUNNER_VERSION="2.165.2"
+ARG GH_RUNNER_VERSION="2.168.0"
 ARG TARGETPLATFORM="x64"
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
